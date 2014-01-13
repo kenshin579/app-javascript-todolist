@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr"/>
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <script src="../libs/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadList();
+
+            $('#add-new').click(function () {
+                addNewItem("", false);
+            });
+
+            $('#cleanup').click(cleanupList);
+            $('#submit').click(send);
+
+        });
+
+        function send() {
+            var listData = window.localStorage.getItem("listData");
+            console.log(listData);
+//            listData = JSON.parse(listData);
+//            console.log(JSON.stringify(listData));
+
+            var inputData = {"todo" : listData};
+
+            $.ajax({
+                url: 'LoginController',
+                type: 'POST',
+                data: inputData,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data)
+                        $("#msg").text("Validation Success");
+                    else
+                        $("#msg").text("Validation Failure");
+                }
+            });
+        }
+
+        function addNewItem(text, /*Boolean*/ done) {
+            var newItem = $('<div class="item"><input type="checkbox" class="done"><input type="text" class="text"></div>');
+            $('#list').prepend(newItem);
+
+            //질문: 앞에 왜 dot이 붙는가?
+            //A: class selector in jquery
+            newItem.find('.done').get(0).checked = done; //체크박스 속성을 체크함
+            newItem.find('.text').val(text);
+            newItem.find('.text').focus();
+            //any text, done
+            newItem.find('.text, .done').change(saveList);
+        }
+
+        function cleanupList() {
+            $('#list .item .done:checked').parent().remove();
+
+            $('#list .item .text').filter(function (index, inputBox) {
+                return inputBox.value == "";
+            }).parent().remove();
+
+            saveList();
+        }
+
+        function loadList() {
+            var listData = window.localStorage.getItem("listData");
+            listData = JSON.parse(listData);
+
+            console.log("loaded list data", listData);
+            if (!listData)
+                return;
+            for (var i = 0; i < listData.length; i++) {
+                var itemData = listData[i];
+                addNewItem(itemData.text, itemData.done);
+            }
+        }
+
+        function saveList() {
+            var listData = [];
+            $('#list .item').each(function (index, item) {
+                listData.push({
+                    text: $(item).find('.text').val(),
+                    done: $(item).find('.done').get(0).checked
+                });
+            });
+            console.log("saved list data", listData);
+            listData = JSON.stringify(listData);
+            window.localStorage.setItem("listData", listData);
+        }
+
+    </script>
+</head>
+<body>
+<h1>To-Do List</h1>
+
+<div id="toolbar">
+    <button id="add-new">Add new item</button>
+    <button id="cleanup">Cleanup list</button>
+    <button id="submit">동기화</button>
+</div>
+<div id="list"></div>
+<div id="msg"></div>
+
+</body>
+</html>
+

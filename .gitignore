@@ -1,0 +1,8 @@
+src/main/webapp/libs
+target
+.classpath
+.settings
+.project
+.idea
+*.iml
+.DS_Store
