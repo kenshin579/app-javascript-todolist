@@ -18,13 +18,27 @@
 
         });
 
+        function marshalling(listData /*String*/) {
+            console.log("marshalling");
+            //[{"text":"todo3","done":false},{"text":"todo2","done":false},{"text":"todo1","done":false}]
+            var retListData = [];
+            JSON.parse(listData, function (key, value) {
+                if (key == 'text') {
+                    retListData.push({key: value});
+                }
+            });
+            console.log(JSON.stringify(retListData));
+            return JSON.stringify(retListData);
+        }
+
+        function unmarshalling() {
+
+        }
+
         function send() {
             var listData = window.localStorage.getItem("listData");
-            console.log(listData);
-//            listData = JSON.parse(listData);
-//            console.log(JSON.stringify(listData));
-
-            var inputData = {"todo" : listData};
+            console.log("send: " + listData);
+            var inputData = {"todo": marshalling(listData)};
 
             $.ajax({
                 url: 'LoginController',
@@ -32,7 +46,7 @@
                 data: inputData,
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
+//                    console.log(data);
                     if (data)
                         $("#msg").text("Validation Success");
                     else

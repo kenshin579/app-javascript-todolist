@@ -1,4 +1,6 @@
-package todo;
+package controller;
+
+import util.DbUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class MemRegServlet
  */
-@WebServlet("/todo/LoginController")
+@WebServlet("/controller/LoginController")
 public class ToDo extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -26,9 +28,11 @@ public class ToDo extends HttpServlet {
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String receiveData = request.getParameter("todo");
+        String receiveData = request.getParameter("controller");
 
         System.out.println("receiveData: " + receiveData);
+        //[{"text":"todo3"},{"text":"todo2"},{"text":"todo1"}]
+        DbUtil.getInstance().insertToDoData(receiveData);
 
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
@@ -37,5 +41,7 @@ public class ToDo extends HttpServlet {
         out.print(receiveData);
         out.flush();
     }
+
+
 
 }
