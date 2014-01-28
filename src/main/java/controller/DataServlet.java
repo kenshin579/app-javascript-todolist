@@ -3,29 +3,28 @@ package controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import svc.TodoBiz;
-import vo.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/loadData")
+public class DataServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final Logger log = LoggerFactory.getLogger(LoginServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(DataServlet.class);
 
     /**
      * @see javax.servlet.http.HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public DataServlet() {
         super();
     }
 
@@ -39,30 +38,23 @@ public class LoginServlet extends HttpServlet {
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String passwd = request.getParameter("passwd");
-        log.info("id: " + id + " passwd: " + passwd);
+        log.info("loadData");
+////        String receiveData = request.getParameter("controller");
+//
+////        System.out.println("receiveData: " + receiveData);
+//        //[{"text":"todo3"},{"text":"todo2"},{"text":"todo1"}]
+//        DbUtil.getInstance().updateToDoData(receiveData);
 
-        TodoBiz todoBiz = new TodoBiz();
-        User user = todoBiz.getUserLogin(id, passwd);
+        String resultStr = TodoBiz.getTodoContent("ykoh");
+        log.info("resultStr" + resultStr);
 
-        if (user != null) {
-            log.info("login successful");
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
 
-            // db access
-
-            session.setAttribute("test", "frank");
-            response.sendRedirect("todo.html");
-//            request.setAttribute("test2", "test2");
-//            RequestDispatcher dispatcher = request.getRequestDispatcher("todo.html");
-//            dispatcher.forward(request, response);
-
-        } else {
-            log.info("login unsuccessful");
-//            response.sendRedirect("");
-        }
+//        String jsonObject = "{ \"output\": \"" + receiveData +"\"} ";
+//        out.print(receiveData);
+        out.print(resultStr);
+        out.flush();
 
     }
 

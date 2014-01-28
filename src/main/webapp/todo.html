@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>To-Do List</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!--<link rel="stylesheet" href="css/style.css">-->
-    <script src="../libs/jquery/jquery.min.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             loadList();
@@ -20,7 +20,7 @@
 
         function marshalling(listData /*String*/) {
             console.log("marshalling");
-            //[{"text":"todo3","done":false},{"text":"todo2","done":false},{"text":"todo1","done":false}]
+            //[{"text":"todo3","done":false},{"text":"todo2","done":false},{"text":"todo1","done":true}]
             var retListData = [];
             JSON.parse(listData, function (key, value) {
                 if (key == 'text') {
@@ -31,22 +31,18 @@
             return JSON.stringify(retListData);
         }
 
-        function unmarshalling() {
-
-        }
-
         function send() {
             var listData = window.localStorage.getItem("listData");
             console.log("send: " + listData);
-            var inputData = {"todo": marshalling(listData)};
+            var inputData = {"todo": listData};
 
             $.ajax({
-                url: 'LoginController',
+                url: 'Sync',
                 type: 'POST',
                 data: inputData,
                 dataType: 'json',
                 success: function (data) {
-//                    console.log(data);
+                    console.log(data);
                     if (data)
                         $("#msg").text("Validation Success");
                     else
@@ -59,9 +55,9 @@
             var newItem = $('<div class="item"><input type="checkbox" class="done"><input type="text" class="text"></div>');
             $('#list').prepend(newItem);
 
-            //질문: 앞에 왜 dot이 붙는가?
+            //占쏙옙: 占쌌울옙 占쏙옙 dot占쏙옙 占쌕는곤옙?
             //A: class selector in jquery
-            newItem.find('.done').get(0).checked = done; //체크박스 속성을 체크함
+            newItem.find('.done').get(0).checked = done; //체크占쌘쏙옙 占쌈쇽옙占쏙옙 체크占쏙옙
             newItem.find('.text').val(text);
             newItem.find('.text').focus();
             //any text, done
@@ -79,16 +75,40 @@
         }
 
         function loadList() {
-            var listData = window.localStorage.getItem("listData");
-            listData = JSON.parse(listData);
+//            var listData = window.localStorage.getItem("listData");
+            var listData = null;
 
-            console.log("loaded list data", listData);
-            if (!listData)
-                return;
-            for (var i = 0; i < listData.length; i++) {
-                var itemData = listData[i];
-                addNewItem(itemData.text, itemData.done);
-            }
+            $.ajax({
+                url: 'loadData',
+                type: 'POST',
+                data: '',
+                dataType: 'json',
+                success: function (data) {
+                    listData = data;
+                    for (var i = 0; i < listData.length; i++) {
+                        listData[i].done = false;
+                    }
+
+                    console.log("received: ", data);
+
+                    if (!listData)
+                        return;
+                    for (var i = 0; i < listData.length; i++) {
+                        var itemData = listData[i];
+                        addNewItem(itemData.text, itemData.done);
+                    }
+
+//                    if (data)
+//                        $("#msg").text("Validation Success");
+//                    else
+//                        $("#msg").text("Validation Failure");
+                },
+                error: function (data, status, er) {
+                    console.log("error: " + data + " status: " + status + " er:" + er);
+                }
+            });
+
+
         }
 
         function saveList() {
@@ -112,7 +132,7 @@
 <div id="toolbar">
     <button id="add-new">Add new item</button>
     <button id="cleanup">Cleanup list</button>
-    <button id="submit">동기화</button>
+    <button id="submit">占쏙옙占쏙옙화</button>
 </div>
 <div id="list"></div>
 <div id="msg"></div>

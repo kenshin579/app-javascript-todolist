@@ -52,20 +52,6 @@ public class DbUtil {
 
     }
 
-    public boolean insertToDoData(String receiveData) {
-        PreparedStatement pstmt = null;
-        boolean result = false;
-
-        try {
-            String sql = "INSERT INTO todo VALUES ('ykoh', '" + receiveData + "')";
-            System.out.println("query: " + sql);
-            pstmt = connection.prepareStatement(sql);
-            result = pstmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 
     public static void close(Connection con) {
         try {

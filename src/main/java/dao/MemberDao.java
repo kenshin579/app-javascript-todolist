@@ -8,19 +8,44 @@ import vo.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * DB에 존재하는 데이터들을 sql 문장을 이용해서 다루는 클래스들, 즉
  * DAO(Data Access Object)들이 존재하는 패키지이다.
  */
-public class LoginDao {
-    private static final Logger log = LoggerFactory.getLogger(LoginDao.class);
+public class MemberDao {
+    private static final Logger log = LoggerFactory.getLogger(MemberDao.class);
     Connection con;
 
 
-    public LoginDao(Connection con) {
+    public MemberDao(Connection con) {
         super();
         this.con = con;
+    }
+
+
+    public boolean createMember(User user) {
+        PreparedStatement pstmt = null;
+        boolean result = false;
+        try {
+            String sql = "INSERT INTO account VALUES (?, ?, ?, ?)";
+            System.out.println("query: " + sql);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, user.getUserid());
+            pstmt.setString(2, user.getPasswd());
+            pstmt.setString(3, user.getName());
+            pstmt.setString(4, user.getEmail());
+            int returnValue = pstmt.executeUpdate();
+            if (returnValue > 0)
+                result = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.getInstance().close(pstmt);
+        }
+        return result;
     }
 
     public User getUserLogin(String id, String passwd) {
