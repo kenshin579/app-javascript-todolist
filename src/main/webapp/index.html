@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <head>
     <title>Account</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin for TODO</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
 </head>
 <body>
-<form action="login" method="post">
-    아 이 디 : <input type="text" name="id"/><br>
-    비밀번호 : <input type="password" name="passwd"/><br>
-    <input type="submit" value="로그인"/>
-</form>
-<a href="register.html">회원가입</a>
+<!--<form action="login" method="post">-->
+<!--아 이 디 : <input type="text" name="id"/><br>-->
+<!--비밀번호 : <input type="password" name="passwd"/><br>-->
+<!--<input type="submit" value="로그인"/>-->
+<!--</form>-->
+<!--<a href="register.html">회원가입</a>-->
+
+<div class="container">
+    <form class="form-signin" role="form" action="login" method="post">
+        <h2 class="form-signin-heading">로그인</h2>
+        <a href="register.html">회원가입</a>
+        <input type="text" class="form-control" placeholder="아이디를 입력하세요" required autofocus name="id">
+        <input type="password" class="form-control" placeholder="암호를 입력하세요" required name="passwd">
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> 아이디 기억
+        </label>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">Sign in</button>
+    </form>
+
+</div>
+<!-- /container -->
+
 </body>
 </html>
