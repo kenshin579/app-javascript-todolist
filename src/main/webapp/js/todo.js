@@ -32,7 +32,9 @@ function send() {
 }
 
 function addNewItem(text, /*Boolean*/ done) {
-    var newItem = $('<div class="item"><input type="checkbox" class="done"><input type="text" class="text"></div>');
+//    var newItem = $('<div class="item"><input type="checkbox" class="done"><input type="text" class="text"></div>');
+    var newItem = $('<div class="row"><div class="col-lg-12"><div class="input-group"><span class="input-group-addon">' +
+        '<input type="checkbox" class="done"></span><input type="text" placeholder="할일을 입력하세요" class="form-control text"></div></div></div>');
     $('#list').prepend(newItem);
 
     //��: �տ� �� dot�� �ٴ°�?

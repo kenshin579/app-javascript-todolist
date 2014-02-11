@@ -40,11 +40,11 @@ public class RegisterServlet extends HttpServlet {
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userid = request.getParameter("id");
-        String passwd = request.getParameter("passwd");
-        String confirmpasswd = request.getParameter("confirmpasswd");
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
+        String userid = request.getParameter("inputId");
+        String passwd = request.getParameter("inputPasswd");
+        String confirmpasswd = request.getParameter("inputConfirmPasswd");
+        String name = request.getParameter("inputName");
+        String email = request.getParameter("inputEmail");
 
         Connection con = DbUtil.getInstance().getConnection();
 

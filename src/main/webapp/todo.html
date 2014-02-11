@@ -3,7 +3,7 @@
 <head>
     <title>To-Do List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--<link rel="stylesheet" href="css/style.css">-->
+    <link rel="stylesheet" href="css/style.css">
     <!--<link href="libs/bootstrap-2.3.2/css/bootstrap.css" rel="stylesheet">-->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <!--<link href="libs/bootstrap-2.3.2/css/bootstrap-responsive.css" rel="stylesheet">-->
@@ -32,17 +32,20 @@
 <body>
 
 <div class="container">
-    <h1>To-Do List</h1>
+    <div class="starter-template">
+        <h1>To-Do List</h1>
 
-    <div id="toolbar">
-        <button id="add-new" class="btn btn-primary">추가</button>
-        <button id="cleanup" class="btn btn-primary">제거</button>
-        <button id="submit" class="btn btn-danger">동기화</button>
+
+        <div class="btn-toolbar" role="toolbar">
+            <button id="add-new" class="btn btn-lg btn-primary">추가</button>
+            <button id="cleanup" class="btn btn-lg btn-primary">제거</button>
+            <button id="submit" class="btn btn-lg btn-danger">동기화</button>
+        </div>
+        <p></p>
+
+        <div id="list"></div>
+        <div id="msg"></div>
     </div>
-    <p></p>
-
-    <div id="list"></div>
-    <div id="msg"></div>
 </div>
 </body>
 </html>

@@ -1,56 +1,79 @@
 body {
-    padding: 0 10%;
-    background-color: #CCDDFF;
+    padding-top: 10px;
 }
 
-h1 {
-    font-size: 50pt;
-    text-align: center;
-    text-shadow: #FFF 1px 1px 1px;
-    margin-top: 0;
-}
-
-#toolbar {
+.starter-template {
+    padding: 40px 15px;
     text-align: center;
 }
 
-#toolbar button {
-    width: 30%;
-    border: none;
-    padding: 10pt;
-    margin: 4pt;
-    border-radius: 10px;
-    box-shadow: inset #FFF 1px 1px 1px, #999 1px 1px 2px;
-    background-color: rgba(255, 255, 255, 0.5);
-    font-size: 20pt;
-    cursor: pointer;
+/*
+ * Footer
+ */
+
+.mastfoot {
+    color: #999; /* IE8 proofing */
+    color: #000000;
 }
 
-#toolbar button:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+/* Padding for spacing */
+.inner {
+    padding: 30px;
 }
 
-#toolbar button:active:hover {
-    box-shadow: inset #999 1px 1px 2px;
-    border: none;
-}
+/*body {*/
+/*padding: 0 10%;*/
+/*background-color: #CCDDFF;*/
+/*}*/
 
-.item {
-    padding: 10pt;
-    margin: 4pt 0;
-    border-radius: 10px;
-    box-shadow: inset #999 1px 1px 2px;
-    background-color: rgba(255, 2355, 255, 0.5);
-    font-size: 20pt;
-}
+/*h1 {*/
+/*font-size: 50pt;*/
+/*text-align: center;*/
+/*text-shadow: #FFF 1px 1px 1px;*/
+/*margin-top: 0;*/
+/*}*/
 
-.item input[type="checkbox"] {
-    margin-right: 10px;
-}
+/*#toolbar {*/
+/*text-align: center;*/
+/*}*/
 
-.item input[type="text"] {
-    font-size: 20pt;
-    background: transparent;
-    border: none;
-    width: 90%;
-}
+/*#toolbar button {*/
+/*width: 30%;*/
+/*border: none;*/
+/*padding: 10pt;*/
+/*margin: 4pt;*/
+/*border-radius: 10px;*/
+/*box-shadow: inset #FFF 1px 1px 1px, #999 1px 1px 2px;*/
+/*background-color: rgba(255, 255, 255, 0.5);*/
+/*font-size: 20pt;*/
+/*cursor: pointer;*/
+/*}*/
+
+/*#toolbar button:hover {*/
+/*background-color: rgba(255, 255, 255, 0.6);*/
+/*}*/
+
+/*#toolbar button:active:hover {*/
+/*box-shadow: inset #999 1px 1px 2px;*/
+/*border: none;*/
+/*}*/
+
+/*.item {*/
+/*padding: 10pt;*/
+/*margin: 4pt 0;*/
+/*border-radius: 10px;*/
+/*box-shadow: inset #999 1px 1px 2px;*/
+/*background-color: rgba(255, 2355, 255, 0.5);*/
+/*font-size: 20pt;*/
+/*}*/
+
+/*.item input[type="checkbox"] {*/
+/*margin-right: 10px;*/
+/*}*/
+
+/*.item input[type="text"] {*/
+/*font-size: 20pt;*/
+/*background: transparent;*/
+/*border: none;*/
+/*width: 90%;*/
+/*}*/
