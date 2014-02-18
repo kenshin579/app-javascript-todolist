@@ -15,6 +15,7 @@ function send() {
     var listData = window.localStorage.getItem("listData");
     console.log("send: " + listData);
     var inputData = {"todo": listData};
+    console.log("inputData: " + inputData);
 
     $.ajax({
         url: 'Sync',
