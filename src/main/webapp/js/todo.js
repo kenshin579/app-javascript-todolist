@@ -27,6 +27,11 @@ function send() {
                 $("#msg").text("Validation Success");
             else
                 $("#msg").text("Validation Failure");
+        },
+        error: function (xhr) {
+            if (xhr.statusText != "abort" && xhr.status != 503) {
+                console.error("xhr error!!");
+            }
         }
     });
 }
