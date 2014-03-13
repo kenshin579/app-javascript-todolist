@@ -12,29 +12,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="libs/jquery/jquery.min.js"></script>
-    <script src="js/todo.js"></script>
-    <script>
-        $(document).ready(function () {
-            loadList();
+    <!--<script src="libs/jquery/jquery.min.js"></script>-->
+    <!--<script src="js/todo.js"></script>-->
+    <!--<script>-->
+    <!--$(document).ready(function () {-->
+    <!--loadList();-->
 
-            $('#add-new').click(function () {
-                addNewItem("", false);
-            });
+    <!--$('#add-new').click(function () {-->
+    <!--addNewItem("", false);-->
+    <!--});-->
 
-            $('#cleanup').click(cleanupList);
-            $('#submit').click(send);
+    <!--$('#cleanup').click(cleanupList);-->
+    <!--$('#submit').click(send);-->
 
+    <!--});-->
+
+    <!--</script>-->
+
+    <script src="/libs/requirejs/require.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript">
+        require(["Todo", "domReady!"], function (Todo) {
+            console.log("todo started");
+            var todo = new Todo();
         });
 
     </script>
+
 </head>
 <body>
 
 <div class="container">
     <div class="starter-template">
         <h1>To-Do List</h1>
-
 
         <div class="btn-toolbar" role="toolbar">
             <button id="add-new" class="btn btn-lg btn-primary">추가</button>
