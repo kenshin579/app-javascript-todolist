@@ -66,6 +66,7 @@ public class MemberDao {
                 user.setName(rs.getString("name"));
                 user.setPasswd(rs.getString("passwd"));
                 user.setEmail(rs.getString("email"));
+
                 log.info(user.getUserid());
                 log.info(user.getPasswd());
                 log.info(user.getName());
@@ -79,5 +80,62 @@ public class MemberDao {
         }
 
         return user;
+    }
+
+    public boolean isExistUserId(String userId) {
+        boolean isExist = false;
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            String sql = "select count(*) from account where userid =?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                if (rs.getInt(1) >= 1) {
+                    isExist = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.getInstance().close(pstmt);
+            DbUtil.getInstance().close(rs);
+        }
+
+        return isExist;
+    }
+
+    // TODO : 중복아이디 체크
+    public boolean isExistEmail(String email) {
+        boolean isExist = false;
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            String sql = "select count(*) from account where email =?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, email);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                if (rs.getInt(1) >= 1) {
+                    isExist = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.getInstance().close(pstmt);
+            DbUtil.getInstance().close(rs);
+        }
+
+        return isExist;
     }
 }
