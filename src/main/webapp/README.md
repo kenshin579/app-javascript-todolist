@@ -9,3 +9,5 @@ http://stackoverflow.com/questions/15510118/jquery-find-method-parameter-compose
 http://api.jquery.com/filter/
 
 http://nareshkumarh.wordpress.com/2012/10/11/jquery-ajax-json-servlet-example/
+
+http://stackoverflow.com/questions/6246683/jquery-combining-a-class-selector-and-an-attribute-selector

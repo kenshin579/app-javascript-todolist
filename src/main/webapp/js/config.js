@@ -3,7 +3,8 @@ require.config({
     "paths": {
         "domReady": "libs/domReady/domReady",
         "jquery": "libs/jquery/jquery",
-        "Todo": "js/Todo"
+        "Todo": "js/Todo",
+        "sender": "js/sender"
     }
 });
 

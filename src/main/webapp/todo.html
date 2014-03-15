@@ -4,30 +4,10 @@
     <title>To-Do List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/style.css">
-    <!--<link href="libs/bootstrap-2.3.2/css/bootstrap.css" rel="stylesheet">-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <!--<link href="libs/bootstrap-2.3.2/css/bootstrap-responsive.css" rel="stylesheet">-->
 
     <!-- Bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!--<script src="libs/jquery/jquery.min.js"></script>-->
-    <!--<script src="js/todo.js"></script>-->
-    <!--<script>-->
-    <!--$(document).ready(function () {-->
-    <!--loadList();-->
-
-    <!--$('#add-new').click(function () {-->
-    <!--addNewItem("", false);-->
-    <!--});-->
-
-    <!--$('#cleanup').click(cleanupList);-->
-    <!--$('#submit').click(send);-->
-
-    <!--});-->
-
-    <!--</script>-->
 
     <script src="/libs/requirejs/require.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
@@ -35,6 +15,9 @@
         require(["Todo", "domReady!"], function (Todo) {
             console.log("todo started");
             var todo = new Todo();
+
+            todo.init();
+
         });
 
     </script>
