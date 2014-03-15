@@ -1,7 +1,6 @@
 define([
-    "jquery",
-    "sender"
-], function ($, sender) {
+    "jquery"
+], function ($) {
     var Todo = function () {
         console.log("creating todo");
     };
