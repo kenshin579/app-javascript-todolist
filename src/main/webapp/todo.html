@@ -7,13 +7,13 @@
 
     <!-- Bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
     <script src="/libs/requirejs/require.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript">
         require(["Todo", "domReady!"], function (Todo) {
-            console.log("todo started");
             var todo = new Todo();
 
             todo.init();
@@ -25,19 +25,37 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="starter-template">
-        <h1>To-Do List</h1>
-
-        <div class="btn-toolbar" role="toolbar">
-            <button id="add-new" class="btn btn-lg btn-primary">추가</button>
-            <button id="cleanup" class="btn btn-lg btn-primary">제거</button>
-            <button id="submit" class="btn btn-lg btn-danger">동기화</button>
+<div class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Frank's TODO</a>
         </div>
-        <p></p>
 
-        <div id="list"></div>
-        <div id="msg"></div>
+        <form class="navbar-form navbar-right" role="form">
+            <button id="logout" class="btn btn-success">Logout</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="jumbotron" style="background-color: #ffffff">
+        <div class="starter-template">
+            <!--<h1>To-Do List</h1>-->
+
+            <div class="btn-toolbar" role="toolbar">
+                <button id="add-new" class="btn btn-primary">추가</button>
+                <button id="cleanup" class="btn btn-primary">제거</button>
+            </div>
+            <p></p>
+
+            <div id="list"></div>
+        </div>
     </div>
 </div>
 </body>
