@@ -15,9 +15,7 @@
     <script type="text/javascript">
         require(["Todo", "domReady!"], function (Todo) {
             var todo = new Todo();
-
             todo.init();
-
         });
 
     </script>
@@ -38,6 +36,7 @@
         </div>
 
         <form class="navbar-form navbar-right" role="form">
+            <button id="profile" class="btn">Profile</button>
             <button id="logout" class="btn btn-success">Logout</button>
         </form>
     </div>
@@ -46,8 +45,6 @@
 <div class="container">
     <div class="jumbotron" style="background-color: #ffffff">
         <div class="starter-template">
-            <!--<h1>To-Do List</h1>-->
-
             <div class="btn-toolbar" role="toolbar">
                 <button id="add-new" class="btn btn-primary">추가</button>
                 <button id="cleanup" class="btn btn-primary">제거</button>
