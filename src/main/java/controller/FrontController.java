@@ -1,5 +1,6 @@
-package action;
+package controller;
 
+import action.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vo.User;
@@ -24,12 +25,12 @@ public class FrontController extends HttpServlet implements Servlet {
         String contextPath = req.getContextPath();
         String command = reqURI.substring(contextPath.length());
 
-        log.info("reqURI = " + reqURI); // ex) LoginAtion.td
+        log.info("reqURI = " + reqURI); // ex) LoginAction.td
         log.info("reqURI = " + contextPath); // ex) nothing
-        log.info("reqURI = " + command); // // ex) LoginAtion.td
+        log.info("reqURI = " + command); // // ex) LoginAction.td
 
         ActionForward forward = null;
-        Action action = null;
+        IAction action = null;
 
         if (command.equals(Constants.ACTION_LOGIN)) {
             action = new LoginAction();
