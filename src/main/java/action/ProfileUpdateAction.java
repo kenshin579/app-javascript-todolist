@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 
-public class ProfileUpdateAction implements Action {
+public class ProfileUpdateAction implements IAction {
 
     @Override
     public ActionForward execute(HttpServletRequest req, HttpServletResponse res) throws Exception {

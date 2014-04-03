@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LogoutAction implements Action {
+public class LogoutAction implements IAction {
 
     private static final Logger log = LoggerFactory.getLogger(LogoutAction.class);
 

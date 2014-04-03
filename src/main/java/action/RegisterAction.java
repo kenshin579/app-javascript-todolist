@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 
-public class RegisterAction implements Action {
+public class RegisterAction implements IAction {
 
     private static final Logger log = LoggerFactory.getLogger(RegisterAction.class);
 

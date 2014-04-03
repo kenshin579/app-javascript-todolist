@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test Runner</title>
+
+    <link rel="stylesheet" type="text/css" href="../libs/jasmine/lib/jasmine-core/jasmine.css">
+    <script type="text/javascript" src="../libs/requirejs/require.js"></script>
+    <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
+
+    <script type="text/javascript" src="../libs/jasmine/lib/jasmine-core/jasmine.js"></script>
+    <script type="text/javascript" src="../libs/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="../libs/jasmine-jquery/lib/jasmine-jquery.js"></script>
+
+    <!--<script type="text/javascript"-->
+    <!--data-cover-only="../js"-->
+    <!--data-cover-never="js/lib"-->
+    <!--src="../js/lib/blanket/blanket.min.js"-->
+    <!--data-cover-adapter="../js/lib/blanket/jasmine-blanket.js">-->
+
+    <script type="text/javascript">
+        require.config({
+            "paths": {
+                "domReady": "../libs/requirejs-domready/domReady",
+                "Todo": "../js/Todo",
+                "sender": "../js/sender"
+            }
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        require([
+            "domReady!",
+            "spec/TodoTest"
+        ], function () {
+            jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+            jasmine.getEnv().execute();
+        });
+
+    </script>
+
+</head>
+<body>
+<!-- Left intentionally blank. -->
+</body>
+</html>

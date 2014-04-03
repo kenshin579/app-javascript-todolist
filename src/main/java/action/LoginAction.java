@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginAction implements Action {
+public class LoginAction implements IAction {
     private static final Logger log = LoggerFactory.getLogger(LoginAction.class);
-
-    public static final long ERROR_ID_ALREADY_USED = 0x02;
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
