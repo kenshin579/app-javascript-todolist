@@ -1,5 +1,8 @@
 package action;
 
+import exception.ErrorCode;
+import exception.ErrorMessage;
+import vo.ActionForward;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,11 +13,23 @@ public class ProfileGetAction implements IAction {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 프로파일 버튼 클릭시 클라이언트로 해당 user id에 대한 정보를 넘겨줘야 한다.
+        ActionForward forward = new ActionForward();
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
+        if (user != null) {
+            forward.setUser(user);
+            forward.setRedirect(true);
+            forward.setPath("profile.html");
+        } else {
+            int errorCode = ErrorCode.ERROR_SEESION_INCORRETED;
+            forward.setErrorCode(errorCode);
+            forward.setErrorMessage(ErrorMessage.getErrorMessage(errorCode));
+            forward.setRedirect(true);
+            forward.setPath("error.html");
+        }
 
-        return null;
+        return forward;
     }
 }

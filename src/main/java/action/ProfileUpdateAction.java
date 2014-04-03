@@ -2,7 +2,9 @@ package action;
 
 import dao.MemberDao;
 import exception.ErrorCode;
+import exception.ErrorMessage;
 import util.DbUtil;
+import vo.ActionForward;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,11 +51,11 @@ public class ProfileUpdateAction implements IAction {
             forward.setRedirect(true);
             forward.setPath("todo.html");
         } else {
-            long errorCode = 0;
-
+            int errorCode = 0;
             if (isExistEmail) errorCode = ErrorCode.ERROR_EMAIL_ALREADY_USED;
             else if (!isSamePwd) errorCode = ErrorCode.ERROR_PASSWD_CONFIRM_INCORRETED;
 
+            forward.setErrorMessage(ErrorMessage.getErrorMessage(errorCode));
             forward.setErrorCode(errorCode);
             forward.setRedirect(true);
             forward.setPath("error.html");

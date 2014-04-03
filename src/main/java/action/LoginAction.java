@@ -1,9 +1,11 @@
 package action;
 
 import exception.ErrorCode;
+import exception.ErrorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import svc.TodoBiz;
+import vo.ActionForward;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,9 @@ public class LoginAction implements IAction {
             forward.setRedirect(true);
             forward.setPath("todo.html");
         } else {
-            forward.setErrorCode(ErrorCode.ERROR_ID_PASSWD_INCORRETED);
+            int errorCode = ErrorCode.ERROR_ID_PASSWD_INCORRETED;
+            forward.setErrorCode(errorCode);
+            forward.setErrorMessage(ErrorMessage.getErrorMessage(errorCode));
             forward.setRedirect(true);
             forward.setPath("error.html");
         }

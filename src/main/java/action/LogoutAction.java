@@ -1,7 +1,10 @@
 package action;
 
+import exception.ErrorCode;
+import exception.ErrorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vo.ActionForward;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +32,9 @@ public class LogoutAction implements IAction {
             forward.setRedirect(true);
             forward.setPath("index.html");
         } else {
+            int errorCode = ErrorCode.ERROR_ID_NOT_EXIST;
+            forward.setErrorCode(errorCode);
+            forward.setErrorMessage(ErrorMessage.getErrorMessage(errorCode));
             forward.setRedirect(true);
             forward.setPath("error.html");
         }

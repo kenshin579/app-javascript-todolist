@@ -1,9 +1,10 @@
 package controller;
 
 import action.*;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vo.User;
+import vo.ActionForward;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -11,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("*.td")
 public class FrontController extends HttpServlet implements Servlet {
@@ -61,12 +62,12 @@ public class FrontController extends HttpServlet implements Servlet {
                 e.printStackTrace();
             }
         } else if (command.equals(Constants.ACTION_GET_PROFILE)) {
-            HttpSession session = req.getSession();
-            User user = (User) session.getAttribute("user");
-            // TODO : user 값을 클라이언트로 전달 어떻게?
-            // action를 관리하는 FrontController 하나와
-            // 이처럼 데이터를 전달해야 하는 DataController 하나가 나눠야하지 않을까?
-            return;
+            action = new ProfileGetAction();
+            try {
+                forward = action.execute(req, res);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (command.equals(Constants.ACTION_UPDATE_PROFILE)) {
             action = new ProfileUpdateAction();
             try {
@@ -85,12 +86,38 @@ public class FrontController extends HttpServlet implements Servlet {
         if (forward != null && forward.isRedirect()) {
             try {
                 if (forward.getErrorCode() > 0) {
-                    // TODO : 클라이언트로 에러 코드를 전달할 수 있는 방법 필요
-                    res.sendError(res.SC_CONFLICT, "param needed");
-                    log.info("forward is error!!");
+                    log.info("forward is unsuccessful, code : " + forward.getErrorCode());
+
+                    res.setContentType("application/json; charset=UTF-8");
+                    PrintWriter printout = res.getWriter();
+
+                    JSONObject resObject = new JSONObject();
+                    resObject.put("errorCode", forward.getErrorCode());
+                    resObject.put("errorMessage", forward.getErrorMessage());
+
+                    printout.print(resObject);
+                    printout.flush();
                 } else {
-                    res.sendRedirect(forward.getPath());
                     log.info("forward is successful");
+
+                    if (forward.getUser() != null) {
+                        res.setContentType("application/json; charset=UTF-8");
+                        PrintWriter printout = res.getWriter();
+
+                        JSONObject resObject = new JSONObject();
+                        resObject.put("userId", forward.getUser().getUserid());
+                        resObject.put("name", forward.getUser().getName());
+                        resObject.put("passwd", forward.getUser().getPasswd());
+                        resObject.put("email", forward.getUser().getEmail());
+
+                        printout.print(resObject);
+                        printout.flush();
+
+                        // TODO : user 정보 전달 후 redirect 처리는 어떻게 해야할까?
+//                        res.sendRedirect(forward.getPath());
+                    } else {
+                        res.sendRedirect(forward.getPath());
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

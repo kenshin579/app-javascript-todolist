@@ -3,13 +3,13 @@
 <head>
     <title>Test Runner</title>
 
-    <link rel="stylesheet" type="text/css" href="../libs/jasmine/lib/jasmine-core/jasmine.css">
-    <script type="text/javascript" src="../libs/requirejs/require.js"></script>
-    <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="libs/jasmine/lib/jasmine-core/jasmine.css">
+    <script type="text/javascript" src="libs/requirejs/require.js"></script>
+    <script type="text/javascript" src="libs/jquery/jquery.js"></script>
 
-    <script type="text/javascript" src="../libs/jasmine/lib/jasmine-core/jasmine.js"></script>
-    <script type="text/javascript" src="../libs/jasmine/lib/jasmine-core/jasmine-html.js"></script>
-    <script type="text/javascript" src="../libs/jasmine-jquery/lib/jasmine-jquery.js"></script>
+    <script type="text/javascript" src="libs/jasmine/lib/jasmine-core/jasmine.js"></script>
+    <script type="text/javascript" src="libs/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="libs/jasmine-jquery/lib/jasmine-jquery.js"></script>
 
     <!--<script type="text/javascript"-->
     <!--data-cover-only="../js"-->
@@ -20,9 +20,9 @@
     <script type="text/javascript">
         require.config({
             "paths": {
-                "domReady": "../libs/requirejs-domready/domReady",
-                "Todo": "../js/Todo",
-                "sender": "../js/sender"
+                "domReady": "libs/requirejs-domready/domReady",
+                "Todo": "js/Todo",
+                "sender": "js/sender"
             }
         });
 
@@ -31,7 +31,7 @@
     <script type="text/javascript">
         require([
             "domReady!",
-            "spec/TodoTest"
+            "test/spec/TodoTest"
         ], function () {
             jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
             jasmine.getEnv().execute();

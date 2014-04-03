@@ -2,9 +2,11 @@ package action;
 
 import dao.MemberDao;
 import exception.ErrorCode;
+import exception.ErrorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.DbUtil;
+import vo.ActionForward;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,12 +56,13 @@ public class RegisterAction implements IAction {
             forward.setRedirect(true);
             forward.setPath("index.html");
         } else {
-            long errorCode = 0;
+            int errorCode = 0;
 
             if (isExistUserId) errorCode = ErrorCode.ERROR_ID_ALREADY_USED;
             else if (isExistEmail) errorCode = ErrorCode.ERROR_EMAIL_ALREADY_USED;
             else if (!isSamePwd) errorCode = ErrorCode.ERROR_PASSWD_CONFIRM_INCORRETED;
 
+            forward.setErrorMessage(ErrorMessage.getErrorMessage(errorCode));
             forward.setErrorCode(errorCode);
             forward.setRedirect(true);
             forward.setPath("error.html");
