@@ -3,6 +3,7 @@ package action;
 public class ActionForward {
     private boolean isRedirect = false;
     private String path = null;
+    private long errorCode = 0L;
 
     public boolean isRedirect() {
         return this.isRedirect;
@@ -19,4 +20,13 @@ public class ActionForward {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public long getErrorCode() {
+        return this.errorCode;
+    }
+
+    public void setErrorCode(long errorCode) {
+        this.errorCode = errorCode;
+    }
+
 }

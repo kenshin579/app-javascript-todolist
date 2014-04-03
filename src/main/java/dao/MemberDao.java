@@ -48,6 +48,31 @@ public class MemberDao {
         return result;
     }
 
+    public boolean updateMember(User user) {
+        PreparedStatement pstmt = null;
+        boolean result = false;
+        try {
+            String sql = "UPDATE account set userid=?, passwd=?, name=?, email=? WHERE userid=?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, user.getUserid());
+            pstmt.setString(2, user.getPasswd());
+            pstmt.setString(3, user.getName());
+            pstmt.setString(4, user.getEmail());
+            pstmt.setString(5, user.getUserid());
+            int returnValue = pstmt.executeUpdate();
+
+            if (returnValue > 0)
+                result = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.getInstance().close(pstmt);
+        }
+        return result;
+    }
+
     public User getUserLogin(String id, String passwd) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;

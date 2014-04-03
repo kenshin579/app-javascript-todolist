@@ -2,9 +2,11 @@ package action;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LogoutAction implements Action {
 
@@ -12,6 +14,25 @@ public class LogoutAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return null;
+        ActionForward forward = new ActionForward();
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        log.info("logout id: " + user.getUserid());
+
+        if (user != null) {
+            session.removeAttribute("user");
+
+            log.info("session user = " + session.getAttribute("user"));
+
+            forward.setRedirect(true);
+            forward.setPath("index.html");
+        } else {
+            forward.setRedirect(true);
+            forward.setPath("error.html");
+        }
+
+        return forward;
     }
 }

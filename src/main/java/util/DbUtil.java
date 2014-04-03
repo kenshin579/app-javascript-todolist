@@ -30,28 +30,22 @@ public class DbUtil {
 
     // 드라이버 로딩하는 메소드
     public void loadDriver() {
-
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     // Connection 객체를 반환하는 메소드
     public Connection getConnection() {
-
         try {
             connection = DriverManager.getConnection(url, id, passwd);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return connection;
-
     }
-
 
     public static void close(Connection con) {
         try {
@@ -75,6 +69,5 @@ public class DbUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
