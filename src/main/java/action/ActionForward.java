@@ -1,4 +1,6 @@
-package vo;
+package action;
+
+import vo.User;
 
 public class ActionForward {
     private boolean isRedirect = false;

@@ -2,7 +2,6 @@ package action;
 
 import exception.ErrorCode;
 import exception.ErrorMessage;
-import vo.ActionForward;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
