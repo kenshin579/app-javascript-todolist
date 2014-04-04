@@ -29,8 +29,6 @@ define([
         });
 
         it("saveList가 제대로 되는지 확인", function () {
-
-            //todo. 생성한 inputData를 체크하면 됨
             //참고: http://stackoverflow.com/questions/19440865/jasmine-jquery-test-to-check-if-correct-arguments-have-been-passed-to-a-method
 
             var todo = new Todo();
